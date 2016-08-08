@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TemPeixeNoRU</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_notify_lunch">Notificar Almoço</string>
+    <string name="action_notify_dinner">Notificar Janta</string>
+    <string name="action_refresh">Atualizar</string>
+    <string name="action_vegetarian">Sou Vegetariano</string>
+    <string name="cardapio">Cardápio</string>
+    <string name="action_about">Sobre</string>
+</resources>

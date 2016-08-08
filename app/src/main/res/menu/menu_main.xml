@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.samyvan.tempeixenoru.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_more">
+        <menu>
+            <item android:title="@string/action_refresh"/>
+            <item
+                android:title="@string/action_notify_lunch"
+                android:checkable="true"/>
+            <item
+                android:title="@string/action_notify_dinner"
+                android:checkable="true"/>
+            <item
+                android:title="@string/action_vegetarian"
+                android:checkable="true"/>
+            <item android:title="@string/action_about"/>
+        </menu>
+    </item>
+</menu>
