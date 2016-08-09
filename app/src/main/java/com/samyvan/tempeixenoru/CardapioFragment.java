@@ -32,9 +32,9 @@ public class CardapioFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.content_cardapio, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(dia);
+        View view = inflater.inflate(R.layout.content_card, container, false);
+//        TextView textView = (TextView) view.findViewById(R.id.textView);
+//        textView.setText(dia);
         return view;
     }
 }

@@ -11,15 +11,19 @@
         <menu>
             <item android:title="@string/action_refresh"/>
             <item
+                android:id="@+id/notificarAlmoco"
                 android:title="@string/action_notify_lunch"
                 android:checkable="true"/>
             <item
+                android:id="@+id/notificarJanta"
                 android:title="@string/action_notify_dinner"
                 android:checkable="true"/>
             <item
+                android:id="@+id/vegetarian"
                 android:title="@string/action_vegetarian"
                 android:checkable="true"/>
-            <item android:title="@string/action_about"/>
+            <item android:title="@string/action_about"
+                android:id="@+id/about"/>
         </menu>
     </item>
 </menu>
