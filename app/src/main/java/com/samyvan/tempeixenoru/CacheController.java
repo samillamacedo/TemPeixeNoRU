@@ -22,10 +22,16 @@ import java.net.URL;
  */
 public class CacheController {
 
+    JSONObject _cachedJSON = null;
     UpdateCacheListener listener;
     Activity act;
-    public static final String URL_CARDAPIO = "https://tempeixenoru.herokuapp.com/api/v1/cardapio.json";
 
+    public static final String URL_CARDAPIO = "http://tempeixenoru.herokuapp.com/api/v1/cardapio.json";
+
+    private static CacheController _cacheController;
+    public static CacheController getSigleton(){
+        return _cacheController;
+    }
 
     public static interface UpdateCacheListener {
         void onUpdateCacheStarted();
@@ -52,10 +58,10 @@ public class CacheController {
         }
         @Override
         protected void onPostExecute (Boolean sucess) {
+            _cachedJSON = null;
             if(listener != null) {
                 listener.onUpdateCacheEnded(!sucess);
             }
-
         }
     }
 
@@ -68,6 +74,9 @@ public class CacheController {
     }
 
     private JSONObject readJSON(String key) throws IOException, JSONException {
+        if(_cachedJSON != null)
+            return _cachedJSON;
+
         FileInputStream fis = act.openFileInput(key);
         int size = fis.available();
         byte[] buffer = new byte[size];
@@ -75,14 +84,14 @@ public class CacheController {
         fis.close();
         String data = new String(buffer, "UTF-8");
 
-        return new JSONObject(data);
+        _cachedJSON = new JSONObject(data);
+        return _cachedJSON;
     }
 
     public CacheController(Activity act) {
         this.act = act;
-
+        _cacheController = this;
     }
-
     public JSONObject getCachedCardapio() {
         try {
             return readJSON("cardapio");

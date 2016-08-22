@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "215199470481",
+    "firebase_url": "https://tempeixenoru.firebaseio.com",
+    "project_id": "tempeixenoru",
+    "storage_bucket": "tempeixenoru.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215199470481:android:ae6e2934d9b127e9",
+        "android_client_info": {
+          "package_name": "com.samyvan.tempeixenoru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215199470481-vcianii94e58u1bup1ts84si7aav1pa3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwowMrJr7sykLZDKCf9aFghvnmc5GdkVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

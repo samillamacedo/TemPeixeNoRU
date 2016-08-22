@@ -12,11 +12,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class MainActivity extends AppCompatActivity implements CacheController.UpdateCacheListener {
@@ -37,27 +40,31 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
         toolbar.setNavigationIcon(R.drawable.ic_logo);
         setSupportActionBar(toolbar);
 
+        if(cache == null) {
+            cache = new CacheController(this);
+            cache.setUpdateCacheListener(this);
+            cache.updateCache();
+        }
+
         pageCardapio = (ViewPager) findViewById(R.id.pager_cardapio);
-        cardapioAdapter = new CardapioTabsAdapter(getSupportFragmentManager());
+        cardapioAdapter = new CardapioTabsAdapter(getSupportFragmentManager(), cache);
         pageCardapio.setAdapter(cardapioAdapter);
+        cardapioAdapter.notifyDataSetChanged();
 
         tabStrip = (CustomTabStrip) findViewById(R.id.tab_strip);
         tabStrip.setTabIndicatorColor(0x2196F3);
 
         settings = new AppSettings(this);
 
-        cache = new CacheController(this);
-        cache.setUpdateCacheListener(this);
-        cache.updateCache();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FirebaseMessaging.getInstance().subscribeToTopic("teste");
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
     @Override
@@ -79,9 +86,10 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        Log.d("MainActivity", "clicked: "+id);
 
-        //noinspection SimplifiableIfStatement
+        if (id == R.id.refresh) {
+            cache.updateCache();
+        }
         if (id == R.id.vegetarian) {
             settings.setVegetarian(!settings.getVegetarian());
             item.setChecked(settings.getVegetarian());
@@ -110,14 +118,14 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
     }
     public void onUpdateCacheEnded(boolean error) {
         if (error) {
-            Log.d("MainActivity", "Erro(butOk)");
+            Toast.makeText(getApplicationContext(), "Falha ao atualizar o cardápio", Toast.LENGTH_LONG).show();
         } else {
-            Log.d("MainActivity", "just Ok");
-            Log.d("MainActivity", cache.getCachedCardapio().toString());
+            cardapioAdapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Cardapio Atualizado", Toast.LENGTH_LONG).show();
         }
     }
 
     public void onUpdateCacheStarted(){
-        Log.d("MainActivity", "Started");
+
     }
 }

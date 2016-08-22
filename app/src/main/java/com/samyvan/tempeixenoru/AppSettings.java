@@ -45,4 +45,5 @@ public class AppSettings {
         editor.putBoolean("notifyDinner", notifyDinner);
         editor.commit();
     }
+
 }
