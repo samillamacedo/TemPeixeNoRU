@@ -27,7 +27,8 @@ During development, a few tasks were hard to get by, mostly because of complicat
 
 * The worst challenge was to parse the menu into a file format that can be used in programming (JSON). The PDF file format is not good to deal with text, as it breaks them into small parts (and even letters). Text processing, was done using many algorithms together, to improve the accuraccy of the parsed menu.
 * Another thing that took us two day to solve, was to place two lines instead of one in the `TabStrip`. We found out that no one had done this before, and were the first ones to solve it.
-* 
+ 
+
 ### Beyond the final frontier
 Things that were necessary, beyond what was seen in class:
 
