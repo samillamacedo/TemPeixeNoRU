@@ -26,7 +26,7 @@ public class CacheController {
     UpdateCacheListener listener;
     Activity act;
 
-    public static final String URL_CARDAPIO = "http://tempeixenoru.herokuapp.com/api/v1/cardapio.json";
+    public static final String URL_CARDAPIO = "http://tempeixenoru.ufabchelp.me/api/v1/cardapio.json";
 
     private static CacheController _cacheController;
     public static CacheController getSigleton(){
