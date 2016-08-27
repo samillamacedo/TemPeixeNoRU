@@ -37,6 +37,28 @@
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_about2"
+            android:id="@+id/textAbout2"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textAbout"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_about3"
+            android:id="@+id/textAbout3"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textAbout2"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
 
 
     </RelativeLayout>

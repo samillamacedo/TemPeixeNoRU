@@ -16,6 +16,7 @@ public class AppSettings {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+
     public AppSettings(Activity act){
         this.act = act;
         sharedPreferences = act.getPreferences(Context.MODE_PRIVATE);
@@ -78,5 +79,12 @@ public class AppSettings {
             FirebaseMessaging.getInstance().unsubscribeFromTopic("dinner_meat");
         }
     }
+
+//    public boolean getIsCached() { return sharedPreferences.getBoolean("isCached", true);}
+//
+//    public void setIsCached(boolean isCached){
+//        editor.putBoolean("isCached", isCached);
+//        editor.commit();
+//    }
 
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class CardapioFragment extends Fragment{
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt("dia");
 
@@ -44,6 +45,7 @@ public class CardapioFragment extends Fragment{
             JSONArray menus = CacheController.getSigleton().getCachedCardapio().getJSONArray("menu");
             JSONObject menu = menus.getJSONObject(position);
             JSONArray meals = menu.getJSONArray("meals");
+
 
             for(int i = 0; i < meals.length(); i++){
                 list.add(meals.getJSONObject(i));
