@@ -49,14 +49,13 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
         pageCardapio = (ViewPager) findViewById(R.id.pager_cardapio);
         cardapioAdapter = new CardapioTabsAdapter(getSupportFragmentManager(), cache);
         pageCardapio.setAdapter(cardapioAdapter);
-        cardapioAdapter.notifyDataSetChanged();
 
         tabStrip = (CustomTabStrip) findViewById(R.id.tab_strip);
         tabStrip.setTabIndicatorColor(0x2196F3);
 
         settings = new AppSettings(this);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("teste");
+//        FirebaseMessaging.getInstance().subscribeToTopic("developer");
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -19,18 +19,29 @@ public class CardapioTabsAdapter extends FragmentPagerAdapter {
 
 //    public static String DIAS_SEMANA[] = {"SEGUNDA", "TER", "QUA", "QUI", "SEX"};
     public CacheController cacheController;
+    private JSONArray menus;
 
     public CardapioTabsAdapter (FragmentManager fragmentManager, CacheController cacheController){
         super(fragmentManager);
         this.cacheController = cacheController;
+
+        notifyDataSetChanged();
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        try {
+            menus = cacheController.getCachedCardapio().getJSONArray("menu");
+        }catch(Exception e){
+            menus = new JSONArray();
+        }
+        super.notifyDataSetChanged();
+    }
 
     @Override
     public  CharSequence getPageTitle(int position){
 
         try {
-            JSONArray menus = cacheController.getCachedCardapio().getJSONArray("menu");
             JSONObject menu = menus.getJSONObject(position);
             String day = menu.getString("day");
             String date = menu.getString("date");
@@ -42,7 +53,7 @@ public class CardapioTabsAdapter extends FragmentPagerAdapter {
             spanstr.append(date);
             return spanstr;
         }catch(Exception exc){
-            return "erro";
+            return "Carregando...";
         }
     }
 
@@ -63,8 +74,11 @@ public class CardapioTabsAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         try {
-            JSONArray menu = cacheController.getCachedCardapio().getJSONArray("menu");
-            return menu.length();
+            if(menus.length() <= 0)
+                // Return at least 1, so that we have a "loading" title
+                return 1;
+            else
+                return menus.length();
         }catch (Exception exc) {
             return 0;
         }
