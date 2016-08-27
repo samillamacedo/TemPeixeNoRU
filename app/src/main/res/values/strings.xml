@@ -7,5 +7,7 @@
     <string name="action_vegetarian">Sou Vegetariano</string>
     <string name="cardapio">Cardápio</string>
     <string name="action_about">Sobre</string>
-    <string name="text_about">Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores. Escrever sobre os desenvolvedores.  </string>
+    <string name="text_about">"Tem peixe no RU, é um aplicativo desenvolvido pelos alunos Ivan Seidel e Samilla Macedo que sentiram que um aplicativo de cardapio não poderia faltar no restaurante de universidade do séc. XXI como essa.</string>
+    <string name="text_about2">Os conhecimentos para desenvolvimento desse app vieram do mestre Isidro, na disciplina de Programação Avançada para Dispositivos móveis. Procuramos responder a pergunta feita todos os dias por todos os alunos dessa Federal, mas sem mais ladainhas, afinal:</string>
+    <string name="text_about3"> Vai ter peixe ou não na refeição de hoje?</string>
 </resources>
