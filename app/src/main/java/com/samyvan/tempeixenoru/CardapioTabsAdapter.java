@@ -49,6 +49,7 @@ public class CardapioTabsAdapter extends FragmentPagerAdapter {
             SpannableStringBuilder spanstr = new SpannableStringBuilder(day);
             spanstr.setSpan(new StyleSpan(Typeface.BOLD), 0, spanstr.length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
             spanstr.append("\n");
             spanstr.append(date);
             return spanstr;
@@ -74,15 +75,17 @@ public class CardapioTabsAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         try {
-            if(menus.length() <= 0)
+            if(menus.length() <= 0) {
                 // Return at least 1, so that we have a "loading" title
                 return 1;
-            else
+            }else {
                 return menus.length();
+            }
         }catch (Exception exc) {
             return 0;
         }
     }
+
 
 
 }
