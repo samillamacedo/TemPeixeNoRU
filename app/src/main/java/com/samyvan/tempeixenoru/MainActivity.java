@@ -1,25 +1,19 @@
 package com.samyvan.tempeixenoru;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.system.ErrnoException;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
+import org.json.JSONArray;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity implements CacheController.UpdateCacheListener {
@@ -29,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
     CustomTabStrip tabStrip;
     AppSettings settings;
     CacheController cache;
+    int date = date(day(),month());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +39,13 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
             cache = new CacheController(this);
             cache.setUpdateCacheListener(this);
             cache.updateCache();
+
         }
 
         pageCardapio = (ViewPager) findViewById(R.id.pager_cardapio);
         cardapioAdapter = new CardapioTabsAdapter(getSupportFragmentManager(), cache);
         pageCardapio.setAdapter(cardapioAdapter);
+        pageCardapio.setCurrentItem(nearDatePosition(date));
 
         tabStrip = (CustomTabStrip) findViewById(R.id.tab_strip);
         tabStrip.setTabIndicatorColor(0x2196F3);
@@ -66,7 +63,9 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
 //        });
     }
 
-    @Override
+
+
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -116,15 +115,81 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
         return super.onOptionsItemSelected(item);
     }
     public void onUpdateCacheEnded(boolean error) {
+
         if (error) {
             Toast.makeText(getApplicationContext(), "Falha ao atualizar o cardápio", Toast.LENGTH_LONG).show();
         } else {
             cardapioAdapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), "Cardapio Atualizado", Toast.LENGTH_LONG).show();
+            pageCardapio.setCurrentItem(nearDatePosition(date));
         }
     }
 
     public void onUpdateCacheStarted(){
 
     }
+
+    public int day() {
+        SimpleDateFormat df = new SimpleDateFormat("dd");
+        Calendar c = Calendar.getInstance();
+        String todayDate = df.format(c.getTime());
+        int parsedDay = Integer.parseInt(todayDate);
+        // formattedDate have current date/time
+        //Toast.makeText(this, todayDate, Toast.LENGTH_SHORT).show();
+        return parsedDay;
+    }
+
+    public int month() {
+        SimpleDateFormat df = new SimpleDateFormat("MM");
+        Calendar c = Calendar.getInstance();
+        String todayDate = df.format(c.getTime());
+        int parsedMonth = Integer.parseInt(todayDate);
+        return parsedMonth;
+    }
+
+    public int date(int day, int month){
+        return month*100+day;
+    }
+
+    public int parseIntDate(String strDate){
+        String delims = "[/]";
+        String[] tokens = strDate.split(delims);
+        int day = Integer.parseInt(tokens[0]);
+        int month = Integer.parseInt(tokens[1]);
+        int parseIntDate = date(day, month);
+        return parseIntDate;
+    }
+    //retorna a Data posicao da data mais proxima do cardapio da data atual
+    public int nearDatePosition(int date) {
+
+        try {
+            JSONArray menu = cache.getCachedCardapio().getJSONArray("menu");
+            int nearDatePosition = 10;
+            int length = menu.length();
+            String lastDate = menu.getJSONObject(length - 1).getString("date");
+
+            int intLastDate = parseIntDate(lastDate);
+            //compara as datas para retornar a data mais proxima
+            if (date >= intLastDate) {
+                nearDatePosition = length;
+                Log.d("SABADO", String.valueOf(nearDatePosition));
+            } else if(date < intLastDate) {
+                for (int i = 0; i < length; i++) {
+                    String menuDate = menu.getJSONObject(i).getString("date");
+                    int intDate = parseIntDate(menuDate);
+                    if (date == intDate) {
+                        nearDatePosition = i;
+                        Log.d("PROXIMA DATA", String.valueOf(nearDatePosition));
+                    }
+                }
+                if (nearDatePosition == 10){
+                    nearDatePosition = 0;
+                    Log.d("OUTRA DATA", String.valueOf(nearDatePosition));
+                }
+            }
+            return nearDatePosition;
+
+        } catch (Exception exc) {}return 0;
+    }
+
 }
