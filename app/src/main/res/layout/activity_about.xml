@@ -24,11 +24,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/plate_logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/text_about"
             android:id="@+id/textAbout"
@@ -59,6 +60,17 @@
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="18sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/easter_egg"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:visibility="invisible"
+            android:src="@drawable/sponge" />
+
 
 
     </RelativeLayout>

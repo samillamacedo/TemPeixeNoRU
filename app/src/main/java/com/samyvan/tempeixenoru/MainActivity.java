@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements CacheController.U
 
         settings = new AppSettings(this);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("general");
 //        FirebaseMessaging.getInstance().subscribeToTopic("developer");
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
